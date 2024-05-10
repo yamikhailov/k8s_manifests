@@ -2,8 +2,12 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: demo-app-pod
+  name: app
 spec:
   containers:
-    - name: demo-app-container
-      image: yamikhailov/demo_app:v2.0.0
+    - name: nginx
+      image: nginx
+      ports:
+        - containerPort: 8080
+          protocol: TCP
+  restartPolicy: Never
