@@ -1,3 +1,4 @@
+---
 apiVersion: batch/v1
 kind: CronJob
 metadata:
@@ -12,7 +13,9 @@ spec:
             app: hello
         spec:
           containers:
-          - name: app-container
-            image: bash
-            command: ["echo", "Hello World!"]
+            - name: app-container
+              image: bash
+              command:
+                - echo
+                - Hello World!
           restartPolicy: OnFailure

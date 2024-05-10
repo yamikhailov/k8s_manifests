@@ -1,3 +1,4 @@
+---
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -6,15 +7,18 @@ spec:
   template:
     spec:
       containers:
-      - name: app-container
-        image: google/cloud-sdk:275.0.0-alpine
-        command: ["/bin/sh", "-c", "gsutil -m rsync -dr gs://glow-sportradar/ /data/input"]
-        volumeMounts:
-        - name: data-input
-          mountPath: /data/input
+        - name: app-container
+          image: google/cloud-sdk:275.0.0-alpine
+          command:
+            - /bin/sh
+            - -c
+            - gsutil -m rsync -dr gs://glow-sportradar/ /data/input
+          volumeMounts:
+            - name: data-input
+              mountPath: /data/input
       volumes:
-      - name: data-input
-        gcePersistentDisk:
-          pdName: glow-data-disk-200
-          fsType: ext4
+        - name: data-input
+          gcePersistentDisk:
+            pdName: glow-data-disk-200
+            fsType: ext4
       restartPolicy: Never
